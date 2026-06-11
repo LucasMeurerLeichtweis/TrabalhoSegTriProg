@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exemplos de Frameworks</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <a href="https://github.com/LucasMeurerLeichtweis/TrabalhoSegTriProg.git" target="_blank">Acessar Repositório git</a>
+    </header>
+
+    <div class="container">
+        
+
+        <h1>Exemplos "Hello World" em Frameworks Back-end</h1>
+
+        <p>
+            A seguir são apresentados exemplos básicos de implementação de uma rota
+            que retorna a mensagem "Hello World" utilizando os frameworks citados no relatório.
+        </p>
+
+        <section>
+            <h2>Django (Python)</h2>
+
+            <pre><code>
+# views.py
+
+from django.http import HttpResponse
+
+def hello(request):
+    return HttpResponse("Hello World")
+            </code></pre>
+        </section>
+
+        <section>
+            <h2>Spring Boot (Java)</h2>
+
+            <pre><code>
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+@RestController
+public class HelloController {
+
+    @GetMapping("/")
+    public String hello() {
+        return "Hello World";
+    }
+}
+            </code></pre>
+        </section>
+
+        <section>
+            <h2>Laravel (PHP)</h2>
+
+            <pre><code>
+&lt;?php
+
+use Illuminate\Support\Facades\Route;
+
+Route::get('/', function () {
+    return 'Hello World';
+});
+            </code></pre>
+        </section>
+
+        <section>
+            <h2>Express.js (JavaScript)</h2>
+
+            <pre><code>
+const express = require('express');
+const app = express();
+
+app.get('/', (req, res) => {
+    res.send('Hello World');
+});
+
+app.listen(3000);
+            </code></pre>
+        </section>
+
+        <footer style = "text-align: center;">
+            Exemplos básicos de rotas "Hello World" utilizando frameworks de back-end.
+        </footer>
+        <footer style = "text-align: left;">
+            <a href="index.html"><< Retornar ao índice</a>
+        </footer>
+    </div>
+
+</body>
+</html>
