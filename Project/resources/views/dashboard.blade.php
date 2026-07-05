@@ -1,8 +1,14 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Dashboard') }}
+    <div class="flex items-center  w-full">
+        <h2 class="text-xl font-semibold text-gray-800">
+            {{ __('Bem-vindo ao') }}
         </h2>
+
+        <a href="/">
+            <x-application-logocompleta class="h-16 w-auto" />
+        </a>
+    </div>
     </x-slot>
 
     <div class="py-12">
