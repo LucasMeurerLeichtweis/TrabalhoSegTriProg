@@ -18,7 +18,7 @@
                 </div>
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
                     <x-nav-link :href="route('cadastraAuto')" :active="request()->routeIs('cadastraAuto')">
-                        {{ __('Cadastrar Automóvel') }}
+                        {{ __('Register Vehicle') }}
                     </x-nav-link>
                 </div>
             </div>

@@ -2,7 +2,7 @@
     <x-slot name="header">
     <div class="flex items-center w-full justify-center gap-4">
         <h2 class="text-xl font-semibold text-white" style="font-size: 40px; font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif">
-            {{ __('Bem-vindo ao') }}
+            {{ __('Welcome to the') }}
         </h2>
 
         <a href="/">
