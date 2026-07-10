@@ -1,43 +1,52 @@
-
-    <form method="POST" action="{{ route('register') }}">
+    <form method="POST" action="{{ route('veiculo.store') }}">
         @csrf
 
-        <!-- Name -->
+        <!-- Tipo -->
         <div>
-            <x-input-label for="name" :value="__('Name')" />
-            <x-text-input id="name" class="block mt-1 w-full" type="text" name="name" :value="old('name')" required autofocus autocomplete="name" />
-            <x-input-error :messages="$errors->get('name')" class="mt-2" />
+            <x-input-label for="tipo" :value="__('Tipo')" />
+            <x-select-label
+                id="tipo"
+                name="tipo"
+                placeholder="Selecione o tipo"
+            />
+            <x-input-error :messages="$errors->get('tipo')" class="mt-2" />
         </div>
 
-        <!-- Email Address -->
+        <!-- Marca -->
         <div class="mt-4">
-            <x-input-label for="email" :value="__('Email')" />
-            <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autocomplete="username" />
-            <x-input-error :messages="$errors->get('email')" class="mt-2" />
+            <x-input-label for="marca" :value="__('Marca')" />
+            <x-select-label
+                id="marca"
+                name="marca"
+                placeholder="Selecione a marca"
+            />
+            <x-input-error :messages="$errors->get('marca')" class="mt-2" />
         </div>
 
-        <!-- Password -->
+        <!-- Modelo -->
         <div class="mt-4">
-            <x-input-label for="password" :value="__('Password')" />
-
-            <x-text-input id="password" class="block mt-1 w-full"
-                            type="password"
-                            name="password"
-                            required autocomplete="new-password" />
-
-            <x-input-error :messages="$errors->get('password')" class="mt-2" />
+            <x-input-label for="modelo" :value="__('Modelo')" />
+            <x-select-label
+                id="modelo"
+                name="modelo"
+                placeholder="Selecione o modelo"
+            />
+            <x-input-error :messages="$errors->get('modelo')" class="mt-2" />
         </div>
 
-        <!-- Confirm Password -->
+        <!-- Ano -->
         <div class="mt-4">
-            <x-input-label for="password_confirmation" :value="__('Confirm Password')" />
-
-            <x-text-input id="password_confirmation" class="block mt-1 w-full"
-                            type="password"
-                            name="password_confirmation" required autocomplete="new-password" />
-
-            <x-input-error :messages="$errors->get('password_confirmation')" class="mt-2" />
+            <x-input-label for="ano" :value="__('Ano')" />
+            <x-select-label
+                id="ano"
+                name="ano"
+                placeholder="Selecione o ano"
+            />
+            <x-input-error :messages="$errors->get('ano')" class="mt-2" />
         </div>
+
+
+
 
         <div class="flex items-center justify-end mt-4">
 
@@ -46,4 +55,6 @@
             </x-primary-button>
         </div>
     </form>
+
+
 
