@@ -36,4 +36,9 @@ class FipeController extends Controller
         return Http::get("https://parallelum.com.br/fipe/api/v1/$tipo/marcas/$marca/modelos/$modelo/anos")
             ->json();
     }
+    public function veiculo($tipo, $marca, $modelo, $ano)
+    {
+        return Http::get("https://parallelum.com.br/fipe/api/v1/$tipo/marcas/$marca/modelos/$modelo/anos/$ano")
+            ->json();
+    }
 }

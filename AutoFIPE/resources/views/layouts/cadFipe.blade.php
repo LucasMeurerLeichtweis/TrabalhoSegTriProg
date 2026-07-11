@@ -45,15 +45,22 @@
             <x-input-error :messages="$errors->get('ano')" class="mt-2" />
         </div>
 
+        <div class="flex items-center justify-center gap-20 mt-4">
 
-
-
-        <div class="flex items-center justify-end mt-4">
-
-            <x-primary-button class="ms-4">
-                {{ __('Register') }}
-            </x-primary-button>
+        <!-- Valor FIPE -->
+        <div class="mt-4">
+            <x-input-label for="valorFipe" :value="__('Valor FIPE')" />
+            <x-text-input id="valorFipe" class="block mt-1 max-w-25" type="text" name="valor-fipe" readonly />
         </div>
+
+        <!-- Código FIPE -->
+        <div class="mt-4">
+            <x-input-label for="codigoFipe" :value="__('Código FIPE')" />
+            <x-text-input id="codigoFipe" class="block mt-1 max-w-25" type="text" name="codigo-fipe" readonly />
+        </div>
+
+        </div>
+
     </form>
 
 

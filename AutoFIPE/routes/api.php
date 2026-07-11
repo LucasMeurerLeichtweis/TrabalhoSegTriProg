@@ -12,3 +12,4 @@ Route::get('/tipos', [FipeController::class, 'tipos']);
 Route::get('/marcas/{tipo}', [FipeController::class, 'marcas']);
 Route::get('/modelos/{tipo}/{marca}', [FipeController::class, 'modelos']);
 Route::get('/anos/{tipo}/{marca}/{modelo}', [FipeController::class, 'anos']);
+Route::get('/veiculo/{tipo}/{marca}/{modelo}/{ano}', [FipeController::class, 'veiculo']);

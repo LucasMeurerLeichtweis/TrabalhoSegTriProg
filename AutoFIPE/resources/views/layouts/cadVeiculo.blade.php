@@ -2,48 +2,96 @@
     <form method="POST" action="{{ route('register') }}">
         @csrf
 
-        <!-- Name -->
-        <div>
-            <x-input-label for="name" :value="__('Name')" />
-            <x-text-input id="name" class="block mt-1 w-full" type="text" name="name" :value="old('name')" required autofocus autocomplete="name" />
-            <x-input-error :messages="$errors->get('name')" class="mt-2" />
-        </div>
-
-        <!-- Email Address -->
+        <!-- Placa -->
         <div class="mt-4">
-            <x-input-label for="email" :value="__('Email')" />
-            <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autocomplete="username" />
-            <x-input-error :messages="$errors->get('email')" class="mt-2" />
+            <x-input-label for="placa" :value="__('Placa')" />
+            <x-text-input
+            id="placa"
+            maxlength="8"
+            minlength="8"
+            uppercase
+            class="block mt-1 w-full"
+            type="text"
+            style="text-transform: uppercase;"
+            oninput="formatarPlaca(this)"
+            name="placa"
+            :value="old('placa')" required autofocus autocomplete="placa"/>
+            <script>
+                    function formatarPlaca(input) {
+                        let valor = input.value.toUpperCase().replace(/[^A-Z0-9]/g, '');
+                        if (valor.length > 3) {
+                            valor = valor.substring(0, 3) + ' ' + valor.substring(3);
+                        }
+                        input.value = valor;
+                    }
+            </script>
+
+            <x-input-error :messages="$errors->get('placa')" class="mt-2" />
         </div>
 
-        <!-- Password -->
+        <!-- Renavam -->
         <div class="mt-4">
-            <x-input-label for="password" :value="__('Password')" />
+            <x-input-label for="renavam" :value="__('Renavam')" />
+            <x-text-input
+            id="renavam"
+            maxlength="12"
+            minlength="12"
+            uppercase
+            class="block mt-1 w-full"
+            type="text"
+            style="text-transform: uppercase;"
+            oninput="formatarRenavam(this)"
+            name="renavam"
+            :value="old('renavam')" required autofocus autocomplete="renavam"/>
+            <script>
+                    function formatarRenavam(input) {
+                        let valor = input.value.toUpperCase().replace(/[^A-Z0-9]/g, '');
+                        if (valor.length > 10) {
+                            valor = valor.substring(0,10) + '-' + valor.substring(10);
+                        }
+                        input.value = valor;
+                    }
+            </script>
 
-            <x-text-input id="password" class="block mt-1 w-full"
-                            type="password"
-                            name="password"
-                            required autocomplete="new-password" />
-
-            <x-input-error :messages="$errors->get('password')" class="mt-2" />
+            <x-input-error :messages="$errors->get('renavam')" class="mt-2" />
         </div>
 
-        <!-- Confirm Password -->
+
+
+        <!-- Quilometragem -->
         <div class="mt-4">
-            <x-input-label for="password_confirmation" :value="__('Confirm Password')" />
+            <x-input-label for="quilometragem" :value="__('Quilometragem')" />
 
-            <x-text-input id="password_confirmation" class="block mt-1 w-full"
-                            type="password"
-                            name="password_confirmation" required autocomplete="new-password" />
+            <x-number-input
+                id="quilometragem"
+                name="quilometragem"
+                maxlength="6"
+                min="0"
+                max="999999"
+                :value="old('quilometragem')"
+                class="mt-1 block w-full"
+                required
+                autofocus
+            />
 
-            <x-input-error :messages="$errors->get('password_confirmation')" class="mt-2" />
+            <x-input-error :messages="$errors->get('quilometragem')" class="mt-2" />
         </div>
 
-        <div class="flex items-center justify-end mt-4">
-
-            <x-primary-button class="ms-4">
-                {{ __('Register') }}
-            </x-primary-button>
+        <!-- Cor -->
+        <div class="mt-4">
+            <x-input-label for="cor" :value="__('Cor')" />
+            <input
+                type="color"
+                id="cor"
+                name="cor"
+                value="{{ old('cor', '#000000') }}"
+                class="block mt-1 h-10 w-20 rounded-md border border-gray-300 cursor-pointer"
+            >
+            <x-input-error :messages="$errors->get('cor')" class="mt-2" />
         </div>
+
+
     </form>
+
+
 
