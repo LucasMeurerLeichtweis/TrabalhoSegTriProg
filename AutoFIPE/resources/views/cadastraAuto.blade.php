@@ -9,7 +9,8 @@
                     </x-cadFipe>
                 </div>
             </div>
-            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
+
+            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg" style="margin-bottom: 20px;">
                 <div class="p-6 text-gray-900">
                     <h1 style="font-size: 24px; font-weight: bold;"> Vehicle data </h1>
                     <x-cadVeiculo>
@@ -17,9 +18,17 @@
                 </div>
             </div>
 
+            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
+                <div class="p-6 text-gray-900">
+                    <h1 style="font-size: 24px; font-weight: bold;"> Vehicle images </h1>
+                    <x-cadImagemVeiculo>
+                    </x-cadImagemVeiculo>
+                </div>
+            </div>
+
             <div class="flex items-center justify-center mt-4">
                 <x-primary-button  class="ms-4" style="font-size:5vh; font-weight: bold; padding: 20px">
-                    {{ __('Register') }}
+                    {{ __('Register Vehicle') }}
                 </x-primary-button>
             </div>
 

@@ -77,17 +77,37 @@
             <x-input-error :messages="$errors->get('quilometragem')" class="mt-2" />
         </div>
 
-        <!-- Cor -->
-        <div class="mt-4">
-            <x-input-label for="cor" :value="__('Cor')" />
-            <input
-                type="color"
-                id="cor"
-                name="cor"
-                value="{{ old('cor', '#000000') }}"
-                class="block mt-1 h-10 w-20 rounded-md border border-gray-300 cursor-pointer"
-            >
-            <x-input-error :messages="$errors->get('cor')" class="mt-2" />
+        <div style="display: flex; flex-direction: row; justify-content: space-between; align-items: center;">
+            <div style="width: 30%;">
+                <!-- Cor -->
+                <div class="mt-4">
+                    <x-input-label for="cor" :value="__('Cor')" />
+                    <input
+                        type="color"
+                        id="cor"
+                        name="cor"
+                        value="{{ old('cor', '#000000') }}"
+                        class="block mt-1 h-10 w-20 rounded-md border border-gray-300 cursor-pointer"
+                    >
+                    <x-input-error :messages="$errors->get('cor')" class="mt-2" />
+                </div>
+
+                <div class="mt-4">
+                    <x-input-label for="valorCompra" :value="__('Valor de Compra')" />
+                    <x-text-input id="valorCompra" class="block mt-1 max-w-25" type="text" name="valor-compra" />
+                </div>
+
+                <div class="mt-4">
+                    <x-input-label for="valorVenda" :value="__('Valor de Venda')" />
+                    <x-text-input id="valorVenda" class="block mt-1 max-w-25" type="text" name="valor-venda" />
+                </div>
+
+            </div>
+
+            <div class="mt-4" style="width: 70%; height: 27.5vh; display: flex; flex-direction: column;">
+                <x-input-label for="descricao" :value="__('Descrição')" style="height: 10%; width: 100%" />
+                <x-textarea-input id="descricao" name="descricao" style="height: 90%; width: 100%" />
+            </div>
         </div>
 
 

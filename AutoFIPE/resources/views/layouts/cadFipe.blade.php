@@ -59,6 +59,12 @@
             <x-text-input id="codigoFipe" class="block mt-1 max-w-25" type="text" name="codigo-fipe" readonly />
         </div>
 
+        <!-- Mês de Referência -->
+        <div class="mt-4">
+            <x-input-label for="mesReferencia" :value="__('Mês de Referência')" />
+            <x-text-input id="mesReferencia" class="block mt-1 max-w-25" type="text" name="mes-referencia" readonly />
+        </div>
+
         </div>
 
     </form>

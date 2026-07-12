@@ -4,6 +4,7 @@ const modelo = document.getElementById('modelo');
 const ano = document.getElementById('ano');
 const codigoFipe = document.getElementById('codigoFipe');
 const valorFipe = document.getElementById('valorFipe');
+const mesReferencia = document.getElementById('mesReferencia');
 
 // Se o elemento principal não existir nesta página, interrompe o script silenciosamente
 if (!tipo) {
@@ -17,6 +18,14 @@ if (!tipo) {
     }
 
     function preencher(select, lista) {
+
+        if (!lista || !Array.isArray(lista)) {
+            console.error("Erro: Os dados recebidos não são uma lista válida.", lista);
+            alert("Erro ao carregar dados. Confira sua conexão com a internet ou tente novamente mais tarde.");
+            select.innerHTML = `<option value="">Erro ao carregar dados</option>`;
+            return;
+        }
+
         if (!select) return; // Proteção extra caso falte algum elemento individual
         lista.forEach(item => {
             select.innerHTML += `
@@ -92,6 +101,7 @@ if (!tipo) {
 
             codigoFipe.value = veiculo.CodigoFipe;
             valorFipe.value = veiculo.Valor;
+            mesReferencia.value = veiculo.MesReferencia;
 
             })
             .catch(err => console.error(err));
