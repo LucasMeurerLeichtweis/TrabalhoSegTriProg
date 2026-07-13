@@ -7,6 +7,7 @@
                 id="tipo"
                 name="tipo"
                 placeholder="Selecione o tipo"
+                :selected="old('tipo')"
             />
             <x-input-error :messages="$errors->get('tipo')" class="mt-2" />
         </div>
@@ -18,6 +19,7 @@
                 id="marca"
                 name="marca"
                 placeholder="Selecione a marca"
+                :selected="old('marca')"
             />
             <x-input-error :messages="$errors->get('marca')" class="mt-2" />
         </div>
@@ -29,6 +31,7 @@
                 id="modelo"
                 name="modelo"
                 placeholder="Selecione o modelo"
+                :selected="old('modelo')"
             />
             <x-input-error :messages="$errors->get('modelo')" class="mt-2" />
         </div>
@@ -40,6 +43,7 @@
                 id="ano"
                 name="ano_modelo"
                 placeholder="Selecione o ano"
+                :selected="old('ano_modelo')"
             />
             <x-input-error :messages="$errors->get('ano')" class="mt-2" />
         </div>
@@ -49,23 +53,23 @@
         <!-- Valor FIPE -->
         <div class="mt-4">
             <x-input-label for="valorFipe" :value="__('Valor FIPE')" />
-            <x-text-input id="valorFipe" class="block mt-1 max-w-25" type="text" name="valor_fipe" readonly />
+            <x-text-input id="valorFipe" class="block mt-1 max-w-25" type="text" name="valor_fipe" readonly :value="old('valor_fipe')" />
         </div>
 
         <!-- Código FIPE -->
         <div class="mt-4">
             <x-input-label for="codigoFipe" :value="__('Código FIPE')" />
-            <x-text-input id="codigoFipe" class="block mt-1 max-w-25" type="text" name="codigo_fipe" readonly />
+            <x-text-input id="codigoFipe" class="block mt-1 max-w-25" type="text" name="codigo_fipe" readonly :value="old('codigo_fipe')" />
         </div>
 
         <!-- Mês de Referência -->
         <div class="mt-4">
             <x-input-label for="mesReferencia" :value="__('Mês de Referência')" />
-            <x-text-input id="mesReferencia" class="block mt-1 max-w-25" type="text" name="mes_referencia" readonly />
+            <x-text-input id="mesReferencia" class="block mt-1 max-w-25" type="text" name="mes_referencia" readonly :value="old('mes_referencia')" />
         </div>
 
-        <input type="hidden" id="combustivel" name="combustivel">
-        <input type="hidden" id="anoModelo" name="ano_modelo">
+        <input type="hidden" id="combustivel" name="combustivel" :value="old('combustivel')">
+        <input type="hidden" id="anoModelo" name="ano_modelo" :value="old('ano_modelo')">
 
 
         </div>

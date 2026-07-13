@@ -18,9 +18,19 @@ class VeiculoController extends Controller
     public function store(Request $request, CloudinaryService $cloudinary)
     {
 
-        $request->validate([
-            'imagens.*' => 'image|mimes:jpg,jpeg,png,webp|max:5120',
-        ]);
+        $request->validate(
+            [
+                'placa' => 'required|string|max:8|unique:veiculos,placa',
+                'renavam' => 'required|string|unique:veiculos,renavam',
+                'imagens.*' => 'image|mimes:jpg,jpeg,png,webp|max:5120',
+            ],
+            [
+                'placa.unique' => 'Já existe um veículo cadastrado com esta placa.',
+                'renavam.unique' => 'Já existe um veículo cadastrado com este RENAVAM.',
+                'placa.required' => 'Informe a placa.',
+                'renavam.required' => 'Informe o RENAVAM.',
+            ]
+        );
 
         $fipe = FipeVeiculo::firstOrCreate(
             [
