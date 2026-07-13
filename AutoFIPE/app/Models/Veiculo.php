@@ -10,15 +10,20 @@ class Veiculo extends Model
         'fipe_veiculo_id',
         'placa',
         'renavam',
-        'chassi',
         'cor',
         'quilometragem',
-        'ano_fabricacao',
         'valor_compra',
         'valor_venda',
+        'valor_fipe',
+        'mes_referencia',
+        'descricao',
         'ativo',
-        'observacoes',
     ];
+
+    public function imagens()
+        {
+            return $this->hasMany(ImagemVeiculo::class);
+        }
 
     public function fipe()
     {

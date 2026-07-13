@@ -2,6 +2,8 @@
 
     <div class="py-12" >
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8" style="overflow-y: auto; max-height: 80vh; max-width: 70vw;" margin-bottom: 70px;>
+        <form action="{{ route('veiculo.store') }}" method="POST" enctype="multipart/form-data">
+            @csrf
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg" style="margin-bottom: 20px;">
                 <div class="p-6 text-gray-900">
                     <h1 style="font-size: 24px; font-weight: bold;"> Model search </h1>
@@ -32,6 +34,7 @@
                 </x-primary-button>
             </div>
 
+        </form>
         </div>
     </div>
 

@@ -1,5 +1,3 @@
-
-    <form method="POST" action="{{ route('register') }}">
         @csrf
 
         <!-- Placa -->
@@ -94,12 +92,26 @@
 
                 <div class="mt-4">
                     <x-input-label for="valorCompra" :value="__('Valor de Compra')" />
-                    <x-text-input id="valorCompra" class="block mt-1 max-w-25" type="text" name="valor-compra" />
+                    <x-text-input
+                        id="valorCompra"
+                        class="block mt-1 max-w-25"
+                        type="text"
+                        name="valor_compra"
+                        oninput="formatarMoeda(this)"
+                        :value="old('valor_compra')"
+                    />
                 </div>
 
                 <div class="mt-4">
                     <x-input-label for="valorVenda" :value="__('Valor de Venda')" />
-                    <x-text-input id="valorVenda" class="block mt-1 max-w-25" type="text" name="valor-venda" />
+                    <x-text-input
+                        id="valorVenda"
+                        class="block mt-1 max-w-25"
+                        type="text"
+                        name="valor_venda"
+                        oninput="formatarMoeda(this)"
+                        :value="old('valor_venda')"
+                    />
                 </div>
 
             </div>
@@ -110,8 +122,25 @@
             </div>
         </div>
 
+<script>
+function formatarMoeda(input) {
+    // Remove tudo que não é número
+    let valor = input.value.replace(/\D/g, '');
 
-    </form>
+    if (valor === '') {
+        input.value = '';
+        return;
+    }
 
+    // Converte para centavos
+    valor = (parseInt(valor, 10) / 100).toFixed(2);
+
+    // Formata para o padrão brasileiro
+    valor = valor.replace('.', ',');
+    valor = valor.replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+
+    input.value = 'R$ ' + valor;
+}
+</script>
 
 

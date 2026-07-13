@@ -5,6 +5,8 @@ const ano = document.getElementById('ano');
 const codigoFipe = document.getElementById('codigoFipe');
 const valorFipe = document.getElementById('valorFipe');
 const mesReferencia = document.getElementById('mesReferencia');
+const anoModelo = document.getElementById('anoModelo');
+const combustivel = document.getElementById('combustivel');
 
 // Se o elemento principal não existir nesta página, interrompe o script silenciosamente
 if (!tipo) {
@@ -93,15 +95,17 @@ if (!tipo) {
 
         if (!ano.value) return;
 
-        console.log("Evento do ano disparou!");
 
         fetch(`/api/veiculo/${tipo.value}/${marca.value}/${modelo.value}/${ano.value}`)
             .then(res => res.json())
             .then(veiculo => {
 
+
             codigoFipe.value = veiculo.CodigoFipe;
             valorFipe.value = veiculo.Valor;
             mesReferencia.value = veiculo.MesReferencia;
+            anoModelo.value = veiculo.AnoModelo;
+            combustivel.value = veiculo.Combustivel;
 
             })
             .catch(err => console.error(err));

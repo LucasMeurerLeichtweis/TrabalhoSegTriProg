@@ -13,7 +13,6 @@ class FipeVeiculo extends Model
         'modelo',
         'ano_modelo',
         'combustivel',
-        'referencia',
     ];
 
     public function veiculos()

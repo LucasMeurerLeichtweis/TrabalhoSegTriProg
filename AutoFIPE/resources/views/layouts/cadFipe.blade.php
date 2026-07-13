@@ -1,4 +1,3 @@
-    <form method="POST" action="{{ route('veiculo.store') }}">
         @csrf
 
         <!-- Tipo -->
@@ -39,7 +38,7 @@
             <x-input-label for="ano" :value="__('Ano')" />
             <x-select-label
                 id="ano"
-                name="ano"
+                name="ano_modelo"
                 placeholder="Selecione o ano"
             />
             <x-input-error :messages="$errors->get('ano')" class="mt-2" />
@@ -50,24 +49,25 @@
         <!-- Valor FIPE -->
         <div class="mt-4">
             <x-input-label for="valorFipe" :value="__('Valor FIPE')" />
-            <x-text-input id="valorFipe" class="block mt-1 max-w-25" type="text" name="valor-fipe" readonly />
+            <x-text-input id="valorFipe" class="block mt-1 max-w-25" type="text" name="valor_fipe" readonly />
         </div>
 
         <!-- Código FIPE -->
         <div class="mt-4">
             <x-input-label for="codigoFipe" :value="__('Código FIPE')" />
-            <x-text-input id="codigoFipe" class="block mt-1 max-w-25" type="text" name="codigo-fipe" readonly />
+            <x-text-input id="codigoFipe" class="block mt-1 max-w-25" type="text" name="codigo_fipe" readonly />
         </div>
 
         <!-- Mês de Referência -->
         <div class="mt-4">
             <x-input-label for="mesReferencia" :value="__('Mês de Referência')" />
-            <x-text-input id="mesReferencia" class="block mt-1 max-w-25" type="text" name="mes-referencia" readonly />
+            <x-text-input id="mesReferencia" class="block mt-1 max-w-25" type="text" name="mes_referencia" readonly />
         </div>
 
+        <input type="hidden" id="combustivel" name="combustivel">
+        <input type="hidden" id="anoModelo" name="ano_modelo">
+
+
         </div>
-
-    </form>
-
 
 
