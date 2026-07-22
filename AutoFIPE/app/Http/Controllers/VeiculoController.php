@@ -23,12 +23,14 @@ class VeiculoController extends Controller
                 'placa' => 'required|string|max:8|unique:veiculos,placa',
                 'renavam' => 'required|string|unique:veiculos,renavam',
                 'imagens.*' => 'image|mimes:jpg,jpeg,png,webp|max:5120',
+                'cambio' => 'required|string|max:20',
             ],
             [
                 'placa.unique' => 'Já existe um veículo cadastrado com esta placa.',
                 'renavam.unique' => 'Já existe um veículo cadastrado com este RENAVAM.',
                 'placa.required' => 'Informe a placa.',
                 'renavam.required' => 'Informe o RENAVAM.',
+                'cambio.required' => 'Informe o tipo de câmbio.',
             ]
         );
 
@@ -53,6 +55,7 @@ class VeiculoController extends Controller
             'placa' => $request->placa,
             'renavam' => $request->renavam,
             'cor' => $request->cor,
+            'cambio' => $request->cambio,
             'quilometragem' => $request->quilometragem,
             'valor_compra' => $valorCompra,
             'valor_venda' => $valorVenda,

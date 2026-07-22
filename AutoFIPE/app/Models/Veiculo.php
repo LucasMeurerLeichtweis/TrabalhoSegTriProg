@@ -12,6 +12,7 @@ class Veiculo extends Model
         'renavam',
         'cor',
         'quilometragem',
+        'cambio',
         'valor_compra',
         'valor_venda',
         'valor_fipe',

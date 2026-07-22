@@ -25,6 +25,7 @@ return new class extends Migration
             $table->string('placa', 8)->nullable()->unique();
             $table->string('renavam')->nullable()->unique();
             $table->string('chassi')->nullable()->unique();
+            $table->string('cambio', 20)->nullable();
 
             // Dados do veículo
             $table->string('cor', 50);

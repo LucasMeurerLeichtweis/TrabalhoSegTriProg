@@ -16,11 +16,13 @@
                         {{ __('Dashboard') }}
                     </x-nav-link>
                 </div>
+                @unlessrole('client')
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
                     <x-nav-link :href="route('cadastraAuto')" :active="request()->routeIs('cadastraAuto')">
                         {{ __('Register Vehicle') }}
                     </x-nav-link>
                 </div>
+                @endunlessrole
             </div>
 
             <!-- Settings Dropdown -->

@@ -77,6 +77,48 @@
 
         <div style="display: flex; flex-direction: row; justify-content: space-between; align-items: center;">
             <div style="width: 30%;">
+
+                <div class="mt-4">
+                    <x-input-label for="valorCompra" :value="__('Valor de Compra')" />
+                    <x-text-input
+                        style="width: 80%"
+                        id="valorCompra"
+                        class="block mt-1 max-w-sm"
+                        type="text"
+                        name="valor_compra"
+                        oninput="formatarMoeda(this)"
+                        :value="old('valor_compra')"
+                    />
+                </div>
+
+                <div class="mt-4">
+                    <x-input-label for="valorVenda" :value="__('Valor de Venda')" />
+                    <x-text-input
+                        style="width: 80%"
+                        id="valorVenda"
+                        class="block mt-1 max-w-xs"
+                        type="text"
+                        name="valor_venda"
+                        oninput="formatarMoeda(this)"
+                        :value="old('valor_venda')"
+                    />
+                </div>
+
+                <!-- Câmbio -->
+                <div class="mt-4">
+                    <x-input-label for="cambio" :value="__('Câmbio')" />
+                    <x-select-label
+                        style="width: 80%"
+                        id="cambio"
+                        class="block mt-1 max-w-xs"
+                        name="cambio"
+                        placeholder="Selecione o câmbio"
+                        :selected="old('cambio')"
+                        :options="['Manual', 'Automático', 'CVT', 'Semi-automático']"
+                    />
+                    <x-input-error :messages="$errors->get('cambio')" class="mt-2" />
+                </div>
+
                 <!-- Cor -->
                 <div class="mt-4">
                     <x-input-label for="cor" :value="__('Cor')" />
@@ -90,35 +132,11 @@
                     <x-input-error :messages="$errors->get('cor')" class="mt-2" />
                 </div>
 
-                <div class="mt-4">
-                    <x-input-label for="valorCompra" :value="__('Valor de Compra')" />
-                    <x-text-input
-                        id="valorCompra"
-                        class="block mt-1 max-w-25"
-                        type="text"
-                        name="valor_compra"
-                        oninput="formatarMoeda(this)"
-                        :value="old('valor_compra')"
-                    />
-                </div>
-
-                <div class="mt-4">
-                    <x-input-label for="valorVenda" :value="__('Valor de Venda')" />
-                    <x-text-input
-                        id="valorVenda"
-                        class="block mt-1 max-w-25"
-                        type="text"
-                        name="valor_venda"
-                        oninput="formatarMoeda(this)"
-                        :value="old('valor_venda')"
-                    />
-                </div>
-
             </div>
 
-            <div class="mt-4" style="width: 70%; height: 27.5vh; display: flex; flex-direction: column;">
+            <div class="mt-4" style="width: 80%; height: 32.5vh; display: flex; flex-direction: column;">
                 <x-input-label for="descricao" :value="__('Descrição')" style="height: 10%; width: 100%" />
-                <x-textarea-input id="descricao" name="descricao" style="height: 90%; width: 100%" :value="old('descricao')" />
+                <x-textarea-input id="descricao" name="descricao" style="height: 100%; width: 100%" :value="old('descricao')" />
             </div>
         </div>
 
