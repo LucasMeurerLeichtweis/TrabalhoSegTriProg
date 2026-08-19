@@ -134,7 +134,7 @@
 
             </div>
 
-            <div class="mt-4" style="width: 80%; height: 32.5vh; display: flex; flex-direction: column;">
+            <div class="mt-4" style="width: 80%; height: 38vh; display: flex; flex-direction: column;">
                 <x-input-label for="descricao" :value="__('Descrição')" style="height: 10%; width: 100%" />
                 <x-textarea-input id="descricao" name="descricao" style="height: 100%; width: 100%" :value="old('descricao')" />
             </div>

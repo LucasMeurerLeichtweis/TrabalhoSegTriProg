@@ -7,6 +7,7 @@ use App\Models\Veiculo;
 use App\Models\FipeVeiculo;
 use App\Models\ImagemVeiculo;
 use App\Services\CloudinaryService;
+use App\Services\FipeService;
 
 class VeiculoController extends Controller
 {
@@ -86,5 +87,66 @@ class VeiculoController extends Controller
             ->route('cadastraAuto')
             ->with('success', 'Veículo cadastrado com sucesso!');
 
+    }
+
+    public function getVeiculos(){
+    $veiculos = Veiculo::with(['fipe', 'imagens'])->get();
+
+    return view('layouts.boxVeiculo', compact('veiculos'));
+    }
+
+
+    public function index(FipeService $fipeService)
+    {
+        $veiculos = Veiculo::with(['fipe', 'imagens'])
+            ->latest()
+            ->paginate(9);
+
+        foreach ($veiculos as $veiculo) {
+
+            if ($veiculo->fipe) {
+
+                $marca = $fipeService->marcaPorCodigo(
+                    $veiculo->fipe->tipo,
+                    $veiculo->fipe->marca
+                );
+
+                $modelo = $fipeService->modeloPorCodigo(
+                    $veiculo->fipe->tipo,
+                    $veiculo->fipe->marca,
+                    $veiculo->fipe->modelo
+                );
+
+                $veiculo->fipe->marca_descricao =
+                    $marca['name'] ?? 'Marca não encontrada';
+
+                $veiculo->fipe->modelo_descricao =
+                    $modelo['name'] ?? 'Modelo não encontrado';
+            }
+        }
+
+        return view('dashboard', compact('veiculos'));
+    }
+
+    public function show(Veiculo $veiculo, FipeService $fipeService)
+    {
+        $fipe = $veiculo->fipe;
+
+        $marca = $fipeService->marcaPorCodigo(
+            $fipe->tipo,
+            $fipe->marca
+        );
+
+        $modelo = $fipeService->modeloPorCodigo(
+            $fipe->tipo,
+            $fipe->marca,
+            $fipe->modelo
+        );
+
+        return view('veiculos', compact(
+            'veiculo',
+            'marca',
+            'modelo'
+        ));
     }
 }

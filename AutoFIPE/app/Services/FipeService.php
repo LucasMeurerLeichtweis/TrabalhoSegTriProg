@@ -6,25 +6,114 @@ use Illuminate\Support\Facades\Http;
 
 class FipeService
 {
-    protected string $baseUrl = 'https://parallelum.com.br/fipe/api/v1';
+    protected string $baseUrl = 'https://fipe.parallelum.com.br/api/v2';
 
+    protected function tipoApi(string $tipo): string
+    {
+        return match ($tipo) {
+            'carros' => 'cars',
+            'motos' => 'motorcycles',
+            'caminhoes' => 'trucks',
+            default => $tipo,
+        };
+    }
+
+    protected function request()
+    {
+        $request = Http::acceptJson();
+
+        if ($token = config('services.fipe.token')) {
+            $request = $request->withHeaders([
+                'X-Subscription-Token' => $token,
+            ]);
+        }
+
+        return $request;
+    }
+
+    /**
+     * Lista as marcas.
+     */
     public function marcas(string $tipo)
     {
-        return Http::get("{$this->baseUrl}/{$tipo}/marcas")->json();
+        $tipo = $this->tipoApi($tipo);
+
+        return $this->request()
+            ->get("{$this->baseUrl}/{$tipo}/brands")
+            ->json();
     }
 
-    public function modelos(string $tipo, int $marca)
+    /**
+     * Lista os modelos de uma marca.
+     */
+    public function modelos(string $tipo, string $marca)
     {
-        return Http::get("{$this->baseUrl}/{$tipo}/marcas/{$marca}/modelos")->json();
+        $tipo = $this->tipoApi($tipo);
+
+        return $this->request()
+            ->get("{$this->baseUrl}/{$tipo}/brands/{$marca}/models")
+            ->json();
     }
 
-    public function anos(string $tipo, int $marca, int $modelo)
-    {
-        return Http::get("{$this->baseUrl}/{$tipo}/marcas/{$marca}/modelos/{$modelo}/anos")->json();
+    /**
+     * Lista os anos de um modelo.
+     */
+    public function anos(
+        string $tipo,
+        string $marca,
+        string $modelo
+    ) {
+        $tipo = $this->tipoApi($tipo);
+
+        return $this->request()
+            ->get(
+                "{$this->baseUrl}/{$tipo}/brands/{$marca}/models/{$modelo}/years"
+            )
+            ->json();
     }
 
-    public function valor(string $tipo, int $marca, int $modelo, string $ano)
-    {
-        return Http::get("{$this->baseUrl}/{$tipo}/marcas/{$marca}/modelos/{$modelo}/anos/{$ano}")->json();
+    /**
+     * Consulta o valor FIPE.
+     */
+    public function valor(
+        string $tipo,
+        string $marca,
+        string $modelo,
+        string $ano
+    ) {
+        $tipo = $this->tipoApi($tipo);
+
+        return $this->request()
+            ->get(
+                "{$this->baseUrl}/{$tipo}/brands/{$marca}/models/{$modelo}/years/{$ano}"
+            )
+            ->json();
+    }
+
+    /**
+     * Busca uma marca pelo código.
+     */
+    public function marcaPorCodigo(
+        string $tipo,
+        string $codigo
+    ) {
+        $marcas = $this->marcas($tipo);
+
+        return collect($marcas)
+            ->firstWhere('code', $codigo);
+    }
+
+    /**
+     * Busca um modelo pelo código.
+     */
+    public function modeloPorCodigo(
+        string $tipo,
+        string $codigoMarca,
+        string $codigoModelo
+    ) {
+        $modelos = $this->modelos($tipo, $codigoMarca);
+
+        return collect($modelos)
+            ->firstWhere('code', $codigoModelo);
     }
 }

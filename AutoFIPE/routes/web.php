@@ -2,21 +2,27 @@
 
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\VeiculoController;
+use App\Models\Veiculo;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('auth.login');
 });
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+Route::get('/dashboard', [VeiculoController::class, 'index'])
+    ->middleware(['auth', 'verified'])
+    ->name('dashboard');
 
+Route::get('/veiculos/{veiculo}', [VeiculoController::class, 'show'])
+    ->name('veiculos');
 
 Route::middleware(['auth', 'verified', 'role:admin|superadmin'])->group(function () {
 
     Route::get('/cadastraAuto', [VeiculoController::class, 'create'])
         ->name('cadastraAuto');
+
+    Route::get('/boxVeiculo', [VeiculoController::class, 'getVeiculos'])
+        ->name('veiculos.getVeiculos');
 
     Route::post('/cadastraAuto', [VeiculoController::class, 'store'])
         ->name('veiculo.store');

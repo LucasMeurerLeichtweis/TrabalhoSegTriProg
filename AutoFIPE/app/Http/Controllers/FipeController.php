@@ -1,11 +1,16 @@
 <?php
 
 namespace App\Http\Controllers;
-use Illuminate\Support\Facades\Http;
-use Illuminate\Http\Request;
+
+use App\Services\FipeService;
 
 class FipeController extends Controller
 {
+    public function __construct(
+        protected FipeService $fipeService
+    ) {
+    }
+
     public function index()
     {
         return view('cadastraAuto');
@@ -20,25 +25,47 @@ class FipeController extends Controller
         ]);
     }
 
-    public function marcas($tipo)
+    public function marcas(string $tipo)
     {
-        return Http::get("https://parallelum.com.br/fipe/api/v1/$tipo/marcas")->json();
+        return response()->json(
+            $this->fipeService->marcas($tipo)
+        );
     }
 
-    public function modelos($tipo, $marca)
+    public function modelos(string $tipo, string $marca)
     {
-        return Http::get("https://parallelum.com.br/fipe/api/v1/$tipo/marcas/$marca/modelos")
-            ->json()['modelos'];
+        return response()->json(
+            $this->fipeService->modelos($tipo, $marca)
+        );
     }
 
-    public function anos($tipo, $marca, $modelo)
-    {
-        return Http::get("https://parallelum.com.br/fipe/api/v1/$tipo/marcas/$marca/modelos/$modelo/anos")
-            ->json();
+    public function anos(
+        string $tipo,
+        string $marca,
+        string $modelo
+    ) {
+        return response()->json(
+            $this->fipeService->anos(
+                $tipo,
+                $marca,
+                $modelo
+            )
+        );
     }
-    public function veiculo($tipo, $marca, $modelo, $ano)
-    {
-        return Http::get("https://parallelum.com.br/fipe/api/v1/$tipo/marcas/$marca/modelos/$modelo/anos/$ano")
-            ->json();
+
+    public function veiculo(
+        string $tipo,
+        string $marca,
+        string $modelo,
+        string $ano
+    ) {
+        return response()->json(
+            $this->fipeService->valor(
+                $tipo,
+                $marca,
+                $modelo,
+                $ano
+            )
+        );
     }
 }
