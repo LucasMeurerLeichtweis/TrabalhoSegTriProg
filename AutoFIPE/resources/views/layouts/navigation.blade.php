@@ -11,18 +11,32 @@
                 </div>
 
                 <!-- Navigation Links -->
+                @unlessrole('superadmin')
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                         {{ __('Dashboard') }}
                     </x-nav-link>
                 </div>
-                @unlessrole('client')
+                @endunlessrole
+
+                @role('admin')
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
                     <x-nav-link :href="route('cadastraAuto')" :active="request()->routeIs('cadastraAuto')">
                         {{ __('Register Vehicle') }}
                     </x-nav-link>
                 </div>
-                @endunlessrole
+                @endrole
+
+                @role('superadmin')
+                    <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                        <x-nav-link
+                            :href="route('usuarios.index')"
+                            :active="request()->routeIs('usuarios.index')">
+                            {{ __('Usuários') }}
+                        </x-nav-link>
+                    </div>
+                @endrole
+
             </div>
 
             <!-- Settings Dropdown -->

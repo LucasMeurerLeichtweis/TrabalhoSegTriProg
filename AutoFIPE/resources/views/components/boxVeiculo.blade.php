@@ -1,5 +1,5 @@
 <a
-    href="{{ route('veiculos.show', $veiculo->id) }}"
+    href="{{ route('veiculos', $veiculo->id) }}"
     class="block bg-white rounded-xl shadow border overflow-hidden hover:shadow-lg hover:-translate-y-1 transition"
 >
 <div class="bg-white rounded-xl shadow border overflow-hidden hover:shadow-lg transition">

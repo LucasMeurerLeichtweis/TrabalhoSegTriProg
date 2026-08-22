@@ -130,6 +130,9 @@ class VeiculoController extends Controller
 
     public function show(Veiculo $veiculo, FipeService $fipeService)
     {
+        $veiculo->load(['fipe', 'imagens']);
+
+
         $fipe = $veiculo->fipe;
 
         $marca = $fipeService->marcaPorCodigo(

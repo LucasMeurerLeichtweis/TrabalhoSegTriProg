@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\VeiculoController;
 use App\Models\Veiculo;
 use Illuminate\Support\Facades\Route;
@@ -27,6 +28,18 @@ Route::middleware(['auth', 'verified', 'role:admin|superadmin'])->group(function
     Route::post('/cadastraAuto', [VeiculoController::class, 'store'])
         ->name('veiculo.store');
 
+});
+
+Route::middleware(['auth', 'verified', 'role:admin|superadmin'])->group(function () {
+
+    Route::get('/editAuto', [VeiculoController::class, 'index'])
+        ->name('veiculos.index');
+
+});
+
+Route::middleware(['auth', 'role:superadmin'])->group(function () {
+    Route::get('/usuarios', [UserController::class, 'index'])
+        ->name('usuarios.index');
 });
 
 Route::middleware(['auth', 'verified'])->group(function () {
