@@ -40,6 +40,12 @@ Route::middleware(['auth', 'verified', 'role:admin|superadmin'])->group(function
 Route::middleware(['auth', 'role:superadmin'])->group(function () {
     Route::get('/usuarios', [UserController::class, 'index'])
         ->name('usuarios.index');
+
+    Route::put('/usuarios/{usuario}/role', [UserController::class, 'updateRole'])
+        ->name('usuarios.updateRole');
+
+    Route::delete('/usuarios/{usuario}', [UserController::class, 'destroy'])
+        ->name('usuarios.destroy');
 });
 
 Route::middleware(['auth', 'verified'])->group(function () {
