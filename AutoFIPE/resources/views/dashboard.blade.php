@@ -2,7 +2,7 @@
     <x-slot name="header">
     <div class="flex items-center w-full justify-center gap-4">
         <h2 class="text-xl font-semibold text-white" style="font-size: 40px; font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif">
-            {{ __('Welcome to the') }}
+            {{ __('Bem vindo ao') }}
         </h2>
 
         <a href="/">
@@ -17,7 +17,7 @@
             <div class="bg-white overflow-y-auto shadow-sm sm:rounded-lg" style="padding: 15px;">
 
                 <h2 class="text-xl font-semibold text-black mb-3 ml-1" style="font-size: 40px; font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif">
-                    {{ __('Our offers') }}
+                    {{ __('Nossas ofertas') }}
                 </h2>
 
                 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-6">

@@ -149,27 +149,6 @@
 
                     </div>
 
-                    {{-- DESCRIÇÃO --}}
-                    @if ($veiculo->descricao)
-
-                        <div class="mt-10 border-t" style="padding-top:-2rem;">
-
-                            <h2 class="text-2xl font-bold text-gray-900 mb-4">
-                                Descrição
-                            </h2>
-
-                            <p class="text-gray-700 whitespace-pre-line leading-relaxed">
-                                {{ $veiculo->descricao }}
-                            </p>
-
-                        </div>
-
-                    @endif
-
-
-                </div>
-
-
                     {{-- INFORMAÇÕES PRINCIPAIS --}}
                     <div class="flex flex-col">
 
@@ -232,7 +211,7 @@
                                 <strong class="text-lg">
                                     {{ number_format($veiculo->quilometragem, 0, ',', '.') }} km
                                 </strong>
-                            </div>  
+                            </div>
 
 
                             <div class="border rounded-lg p-4">
@@ -282,6 +261,27 @@
                         </div>
 
                     </div>
+
+                </div>
+
+
+
+                        {{-- DESCRIÇÃO --}}
+                        @if ($veiculo->descricao)
+
+                            <div class="mt-10 border-t" style="padding-top:-2rem;">
+
+                                <h2 class="text-2xl font-bold text-gray-900 mb-4">
+                                    Descrição
+                                </h2>
+
+                                <p class="text-gray-700 whitespace-pre-line leading-relaxed">
+                                    {{ $veiculo->descricao }}
+                                </p>
+
+                            </div>
+
+                        @endif
 
                 </div>
 

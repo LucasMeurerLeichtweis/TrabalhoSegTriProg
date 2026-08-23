@@ -6,7 +6,7 @@
             @csrf
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg" style="margin-bottom: 20px;">
                 <div class="p-6 text-gray-900">
-                    <h1 style="font-size: 24px; font-weight: bold;"> Model search </h1>
+                    <h1 style="font-size: 24px; font-weight: bold;"> Buscar modelo </h1>
                     <x-cadFipe>
                     </x-cadFipe>
                 </div>
@@ -14,7 +14,7 @@
 
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg" style="margin-bottom: 20px;">
                 <div class="p-6 text-gray-900">
-                    <h1 style="font-size: 24px; font-weight: bold;"> Vehicle data </h1>
+                    <h1 style="font-size: 24px; font-weight: bold;"> Informações do veículo </h1>
                     <x-cadVeiculo>
                     </x-cadVeiculo>
                 </div>
@@ -22,7 +22,7 @@
 
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900">
-                    <h1 style="font-size: 24px; font-weight: bold;"> Vehicle images </h1>
+                    <h1 style="font-size: 24px; font-weight: bold;"> Imagens do veículo </h1>
                     <x-cadImagemVeiculo>
                     </x-cadImagemVeiculo>
                 </div>
