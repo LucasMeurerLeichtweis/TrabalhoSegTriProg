@@ -3,7 +3,6 @@
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\VeiculoController;
-use App\Models\Veiculo;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -28,13 +27,23 @@ Route::middleware(['auth', 'verified', 'role:admin|superadmin'])->group(function
     Route::post('/cadastraAuto', [VeiculoController::class, 'store'])
         ->name('veiculo.store');
 
-});
-
-Route::middleware(['auth', 'verified', 'role:admin|superadmin'])->group(function () {
-
     Route::get('/editAuto', [VeiculoController::class, 'index'])
         ->name('veiculos.index');
 
+    Route::get('/veiculos/{veiculo}/editar', [VeiculoController::class, 'edit'])
+        ->name('editVeiculo');
+
+    Route::put('/veiculos/{veiculo}', [VeiculoController::class, 'update'])
+        ->name('updateVeiculo');
+
+    Route::get('/listaVeiculos', [VeiculoController::class, 'indexlist'])
+        ->name('listaVeiculos');
+
+    Route::patch('/veiculos/{veiculo}/vendido',[VeiculoController::class, 'vendido'])
+        ->name('veiculo.vendido');
+        
+    Route::delete('/veiculos/{veiculo}',[VeiculoController::class, 'destroy'])
+        ->name('veiculo.destroy');
 });
 
 Route::middleware(['auth', 'role:superadmin'])->group(function () {
@@ -47,6 +56,7 @@ Route::middleware(['auth', 'role:superadmin'])->group(function () {
     Route::delete('/usuarios/{usuario}', [UserController::class, 'destroy'])
         ->name('usuarios.destroy');
 });
+
 
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

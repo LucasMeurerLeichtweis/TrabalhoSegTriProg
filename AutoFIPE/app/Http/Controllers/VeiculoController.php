@@ -99,6 +99,7 @@ class VeiculoController extends Controller
     public function index(FipeService $fipeService)
     {
         $veiculos = Veiculo::with(['fipe', 'imagens'])
+            ->where('ativo', true)
             ->latest()
             ->paginate(9);
 
@@ -128,6 +129,38 @@ class VeiculoController extends Controller
         return view('dashboard', compact('veiculos'));
     }
 
+    public function indexlist(FipeService $fipeService)
+    {
+        $veiculos = Veiculo::with(['fipe', 'imagens'])
+            ->latest()
+            ->paginate(9);
+
+        foreach ($veiculos as $veiculo) {
+
+            if ($veiculo->fipe) {
+
+                $marca = $fipeService->marcaPorCodigo(
+                    $veiculo->fipe->tipo,
+                    $veiculo->fipe->marca
+                );
+
+                $modelo = $fipeService->modeloPorCodigo(
+                    $veiculo->fipe->tipo,
+                    $veiculo->fipe->marca,
+                    $veiculo->fipe->modelo
+                );
+
+                $veiculo->fipe->marca_descricao =
+                    $marca['name'] ?? 'Marca não encontrada';
+
+                $veiculo->fipe->modelo_descricao =
+                    $modelo['name'] ?? 'Modelo não encontrado';
+            }
+        }
+
+        return view('listaVeiculos', compact('veiculos'));
+    }
+
     public function show(Veiculo $veiculo, FipeService $fipeService)
     {
         $veiculo->load(['fipe', 'imagens']);
@@ -151,5 +184,131 @@ class VeiculoController extends Controller
             'marca',
             'modelo'
         ));
+    }
+
+    public function update(Request $request,Veiculo $veiculo) {
+        $dados = $request->validate(
+            [
+                'placa' => [
+                    'required',
+                    'string',
+                    'max:8',
+                    'unique:veiculos,placa,' . $veiculo->id,
+                ],
+
+                'renavam' => [
+                    'required',
+                    'string',
+                    'unique:veiculos,renavam,' . $veiculo->id,
+                ],
+
+                'cor' => 'nullable|string|max:20',
+
+                'cambio' => 'required|string|max:20',
+
+                'quilometragem' => 'nullable|numeric',
+
+                'descricao' => 'nullable|string',
+
+                'valor_compra' => 'nullable',
+
+                'valor_venda' => 'nullable',
+            ],
+            [
+                'placa.unique' => 'Já existe outro veículo cadastrado com esta placa.',
+                'renavam.unique' => 'Já existe outro veículo cadastrado com este RENAVAM.',
+                'placa.required' => 'Informe a placa.',
+                'renavam.required' => 'Informe o RENAVAM.',
+                'cambio.required' => 'Informe o tipo de câmbio.',
+            ]
+        );
+
+        if (!empty($dados['valor_compra'])) {
+            $dados['valor_compra'] = str_replace(
+                ['R$', '.', ','],
+                ['', '', '.'],
+                $dados['valor_compra']
+            );
+        }
+
+        if (!empty($dados['valor_venda'])) {
+            $dados['valor_venda'] = str_replace(
+                ['R$', '.', ','],
+                ['', '', '.'],
+                $dados['valor_venda']
+            );
+        }
+
+        $veiculo->update($dados);
+
+        return redirect()
+            ->route('listaVeiculos')
+            ->with(
+                'success',
+                'Veículo atualizado com sucesso!'
+            );
+    }
+    public function edit(Veiculo $veiculo, FipeService $fipeService)
+    {
+        $veiculo->load(['fipe', 'imagens']);
+
+        $fipe = $veiculo->fipe;
+
+        $marca = $fipeService->marcaPorCodigo(
+            $fipe->tipo,
+            $fipe->marca
+        );
+
+        $modelo = $fipeService->modeloPorCodigo(
+            $fipe->tipo,
+            $fipe->marca,
+            $fipe->modelo
+        );
+        $veiculo->fipe->marca_descricao =
+            $marca['name'] ?? 'Marca não encontrada';
+
+        $veiculo->fipe->modelo_descricao =
+            $modelo['name'] ?? 'Modelo não encontrado';
+
+        return view('editVeiculo', compact(
+            'veiculo',
+            'marca',
+            'modelo'
+        ));
+    }
+    public function vendido(Veiculo $veiculo)
+    {
+        $veiculo->update([
+            'ativo' => false,
+        ]);
+
+        return redirect()
+            ->route('listaVeiculos')
+            ->with(
+                'success',
+                'Veículo marcado como vendido!'
+            );
+    }
+    public function destroy(Veiculo $veiculo, CloudinaryService $cloudinary)
+        {
+        $veiculo->load('imagens');
+
+        foreach ($veiculo->imagens as $imagem) {
+
+            if ($imagem->public_id) {
+                $cloudinary->destroy($imagem->public_id);
+            }
+
+            $imagem->delete();
+        }
+
+        $veiculo->delete();
+
+        return redirect()
+            ->route('listaVeiculos')
+            ->with(
+                'success',
+                'Veículo excluído com sucesso!'
+            );
     }
 }

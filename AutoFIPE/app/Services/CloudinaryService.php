@@ -36,10 +36,11 @@ class CloudinaryService
         ];
     }
 
-    public function excluir(string $publicId): void
+    public function destroy(string $publicId): void
     {
         $this->cloudinary
             ->uploadApi()
             ->destroy($publicId);
     }
+
 }
