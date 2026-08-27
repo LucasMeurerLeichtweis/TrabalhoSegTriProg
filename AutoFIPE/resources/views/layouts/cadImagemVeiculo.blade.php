@@ -69,7 +69,7 @@
     <!-- Imagens existentes que serão excluídas -->
     <div id="imagensExcluidas"></div>
 
-
+    <div id="imagemPrincipal"></div>
     <!-- Ordem das imagens existentes -->
     <div id="ordemImagens"></div>
 
@@ -437,7 +437,44 @@ function atualizarOrdem() {
 
         }
     );
+    atualizarImagemPrincipal();
 
+}
+
+function atualizarImagemPrincipal() {
+
+    const container =
+        document.getElementById('imagemPrincipal');
+
+    container.innerHTML = '';
+
+    const primeiraImagem =
+        preview.children[0];
+
+    if (!primeiraImagem) {
+        return;
+    }
+
+    const input =
+        document.createElement('input');
+
+    input.type = 'hidden';
+    input.name = 'imagem_principal_tipo';
+    input.value =
+        primeiraImagem.dataset.tipo;
+
+    container.appendChild(input);
+
+
+    const inputId =
+        document.createElement('input');
+
+    inputId.type = 'hidden';
+    inputId.name = 'imagem_principal_id';
+    inputId.value =
+        primeiraImagem.dataset.id;
+
+    container.appendChild(inputId);
 }
 
 
