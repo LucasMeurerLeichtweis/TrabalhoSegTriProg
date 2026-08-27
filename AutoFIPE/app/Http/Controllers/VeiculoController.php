@@ -47,9 +47,17 @@ class VeiculoController extends Controller
                 'combustivel' => $request->combustivel,
             ]
         );
-        $valorFipe = str_replace(['R$', '.', ','], ['', '', '.'], $request->valor_fipe);
-        $valorCompra = str_replace(['R$', '.', ','], ['', '', '.'], $request->valor_compra);
-        $valorVenda = str_replace(['R$', '.', ','], ['', '', '.'], $request->valor_venda);
+        $valorFipe = $this->converterMoeda(
+            $request->valor_fipe
+        );
+
+        $valorCompra = $this->converterMoeda(
+            $request->valor_compra
+        );
+
+        $valorVenda = $this->converterMoeda(
+            $request->valor_venda
+        );
 
         $veiculo = Veiculo::create([
             'fipe_veiculo_id' => $fipe->id,
@@ -186,7 +194,8 @@ class VeiculoController extends Controller
         ));
     }
 
-    public function update(Request $request,Veiculo $veiculo) {
+    public function update(Request $request, Veiculo $veiculo)
+    {
         $dados = $request->validate(
             [
                 'placa' => [
@@ -210,9 +219,9 @@ class VeiculoController extends Controller
 
                 'descricao' => 'nullable|string',
 
-                'valor_compra' => 'nullable',
+                'valor_compra' => 'nullable|string',
 
-                'valor_venda' => 'nullable',
+                'valor_venda' => 'nullable|string',
             ],
             [
                 'placa.unique' => 'Já existe outro veículo cadastrado com esta placa.',
@@ -223,21 +232,15 @@ class VeiculoController extends Controller
             ]
         );
 
-        if (!empty($dados['valor_compra'])) {
-            $dados['valor_compra'] = str_replace(
-                ['R$', '.', ','],
-                ['', '', '.'],
+        $dados['valor_compra'] =
+            $this->converterMoeda(
                 $dados['valor_compra']
             );
-        }
 
-        if (!empty($dados['valor_venda'])) {
-            $dados['valor_venda'] = str_replace(
-                ['R$', '.', ','],
-                ['', '', '.'],
+        $dados['valor_venda'] =
+            $this->converterMoeda(
                 $dados['valor_venda']
             );
-        }
 
         $veiculo->update($dados);
 
@@ -248,6 +251,27 @@ class VeiculoController extends Controller
                 'Veículo atualizado com sucesso!'
             );
     }
+
+
+        private function converterMoeda($valor): ?float
+        {
+            if ($valor === null || $valor === '') {
+                return null;
+            }
+
+            $valor = trim($valor);
+
+            // Remove R$ e espaços
+            $valor = str_replace(['R$', ' '], '', $valor);
+
+            // Formato brasileiro: 110.000,50
+            if (str_contains($valor, ',')) {
+                $valor = str_replace('.', '', $valor);
+                $valor = str_replace(',', '.', $valor);
+            }
+
+            return (float) $valor;
+        }
     public function edit(Veiculo $veiculo, FipeService $fipeService)
     {
         $veiculo->load(['fipe', 'imagens']);
@@ -311,4 +335,5 @@ class VeiculoController extends Controller
                 'Veículo excluído com sucesso!'
             );
     }
+
 }

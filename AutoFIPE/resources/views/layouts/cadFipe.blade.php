@@ -114,7 +114,7 @@
                 class="block mt-1 max-w-25"
                 type="text"
                 readonly
-                :value="$veiculo->valor_fipe"
+                :value="'R$ ' . number_format($veiculo->valor_fipe, 2, ',', '.')"
             />
 
         </div>

@@ -235,26 +235,15 @@
                                 </strong>
                             </div>
 
-                        </div>
-
-
-                        {{-- Cor --}}
-                        <div class="mt-6 flex items-center gap-3">
-
-                            <span
-                                class="inline-block w-7 h-7 rounded-full border border-gray-300"
-                                style="background-color: {{ $veiculo->cor }}"
-                            ></span>
-
+                            <div class="border rounded-lg p-4 flex gap-5">
                             <div>
-                                <span class="block text-sm text-gray-500">
-                                    Cor
+                                <span class="block text-lg text-black font-bold">
+                                    Cor:
                                 </span>
-
+                            </div>
                             <span
-                                class="inline-block w-4 h-4 rounded-full border border-gray-300"
+                                class="inline-block w-9 h-9 rounded-full border border-gray-300"
                                 style="background-color: {{ $veiculo->cor }}"
-                                title="Cor do veículo"
                             ></span>
                             </div>
 
@@ -282,78 +271,6 @@
                             </div>
 
                         @endif
-
-                </div>
-
-
-                {{-- DETALHES --}}
-                <div class="mt-10 border-t pt-8">
-
-                    <h2 class="text-2xl font-bold text-gray-900 mb-6">
-                        Detalhes do veículo
-                    </h2>
-
-
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-
-                        <div class="border rounded-lg p-5">
-
-                            <h3 class="font-semibold text-lg mb-4">
-                                Informações FIPE
-                            </h3>
-
-                            <div class="space-y-3 text-gray-700">
-
-                                <div class="flex justify-between">
-                                    <span>Código FIPE</span>
-
-                                    <strong>
-                                        {{ $veiculo->fipe->codigo_fipe }}
-                                    </strong>
-                                </div>
-
-                                <div class="flex justify-between">
-                                    <span>Mês de referência</span>
-
-                                    <strong>
-                                        {{ $veiculo->mes_referencia }}
-                                    </strong>
-                                </div>
-
-                            </div>
-
-                        </div>
-
-
-                        <div class="border rounded-lg p-5">
-
-                            <h3 class="font-semibold text-lg mb-4">
-                                Informações do veículo
-                            </h3>
-
-                            <div class="space-y-3 text-gray-700">
-
-                                <div class="flex justify-between">
-                                    <span>Placa</span>
-
-                                    <strong>
-                                        {{ $veiculo->placa }}
-                                    </strong>
-                                </div>
-
-                                <div class="flex justify-between">
-                                    <span>RENAVAM</span>
-
-                                    <strong>
-                                        {{ $veiculo->renavam }}
-                                    </strong>
-                                </div>
-
-                            </div>
-
-                        </div>
-
-                    </div>
 
                 </div>
 
